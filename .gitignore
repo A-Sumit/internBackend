@@ -1,0 +1,32 @@
+# Node.js dependencies
+node_modules/
+
+# Logs
+logs/
+*.log
+
+# Runtime data
+pids/
+*.pid
+*.pid.lock
+
+# Dependency directories
+jspm_packages/
+bower_components/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Environment variables
+.env
+
+# Mac OS specific files
+.DS_Store
+
+# Editor directories and files
+.idea/
+.vscode/
+*.sublime-workspace
