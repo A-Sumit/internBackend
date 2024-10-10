@@ -1,21 +1,20 @@
-import mongoose, { Mongoose } from'mongoose';
+import mongoose from 'mongoose';
 
-const testcaseSchema = new mongoose.Schema({
-    input: { type: String, required: true },
-    output: { type: String, required: true }
+// Schema for characters in the webtoon
+const characterSchema = new mongoose.Schema({
+    id: { type: String, required: true, unique: true }, // Unique ID for the character
+    name: { type: String, required: true },
+    role: { type: String, required: true }, // e.g., protagonist, antagonist, etc.
+    description: { type: String, required: true } // Description of the character
 });
 
-export const problemSchema = new mongoose.Schema({
-    problemID: { type: String, required: true, unique: true },
-    problemName: { type: String, required: true },
-    problemStatement: { type: String, required: true },
-    testcases: [testcaseSchema]  // Array of testcases
-});
-const contestSchema = new mongoose.Schema({
-    contestId: { type: Number, required: true, unique: true },
-    contestName: { type: String, required: true },
-    contestProblems: [problemSchema]
+// Schema for webtoon
+export const webtoonSchema = new mongoose.Schema({
+    id: { type: String, required: true, unique: true }, // Unique ID for the webtoon
+    title: { type: String, required: true, unique: true },
+    description: { type: String, required: true },
+    characters: [characterSchema] // Array of characters
 });
 
-export const Problem = mongoose.model('Problem', problemSchema);
-export const Contest = mongoose.model('Contest',contestSchema);
+// Create the model
+export const Webtoon = mongoose.model('Webtoon', webtoonSchema);

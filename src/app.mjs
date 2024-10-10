@@ -1,11 +1,14 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import dotenv from 'dotenv';
 import codeRoutes from './routes/codeRoutes.mjs';
+import { apiLimiter } from './middleware/rateLimit.mjs';
 import mongoose from 'mongoose';
 const app = express();
+dotenv.config();
+const uri = process.env.URL;
 
-const uri = "mongodb+srv://user:pass@cluster0.oyr9v.mongodb.net/";
 
 mongoose.connect(uri, {
     useNewUrlParser: true,
@@ -20,7 +23,7 @@ app.use(cors({
   }));
 
 app.use(bodyParser.json());
-
+app.use(apiLimiter);
 app.use('/api', codeRoutes);
 
 app.listen(8080, () => {
